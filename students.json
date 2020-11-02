@@ -1,4 +1,4 @@
-const data = "{
+{
     "m2": [
         {
             "id": "16233",
@@ -1735,4 +1735,4 @@ const data = "{
             "profileImage": "#ED8574"
         }
     ]
-}"
+}
