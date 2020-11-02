@@ -16,45 +16,72 @@
         <center>
           <div id="searchbox">
             <img src="./img/icon-search.svg" alt="search-icon" />
-            <input type="text" placeholder="Search Student ID" />
+            <input type="text" placeholder="Search Student ID" v-model="id" />
           </div>
+          <ul id="dropdown" v-if="student.length == 0 && id != ''">
+            <li v-for="std in currentStudent">
+              <a href="#" @click="student = std">
+                {{ std.name }} {{ std.surname }}
+                <span class="username">@{{ std.id }}</span>
+              </a>
+            </li>
+          </ul>
         </center>
-        <div class="display">
+        <center v-if="student.length == 0">
+          <div class="error">Search your ID . . .</div>
+        </center>
+        <div class="display" v-else>
           <div class="information">
-            <div id="profileImage">
-              <p>BK</p>
+            <div id="profileImage" :style="{background: profileColor }">
+              <p>{{student.name.charAt(0)}}{{student.surname.charAt(0)}}</p>
             </div>
             <div class="name">
-              <h3>{{ name }}</h3>
-              <p>@{{ id }}</p>
+              <h3>{{ student.name }} {{ student.surname }}</h3>
+              <p>@{{ student.id }}</p>
             </div>
           </div>
           <div class="middle">
             <table>
               <tr>
                 <td class="work">PowerApp: Portfolio</td>
-                <td class="score">23</td>
+                <td class="score">{{student.portfolio}}</td>
               </tr>
               <tr>
                 <td class="work">PowerApp: BMI Calculator</td>
-                <td class="score">23</td>
+                <td class="score">{{student.bmi}}</td>
+              </tr>
+              <tr>
+                <td class="work">Exercise: Computer Design</td>
+                <td class="score">{{student.comp_design}}</td>
               </tr>
               <tr>
                 <td class="work">Exercise: CC License</td>
-                <td class="score">23</td>
+                <td class="score">{{student.cc_license}}</td>
+              </tr>
+              <tr>
+                <td class="work">Exercise: Excel</td>
+                <td class="score">{{student.excel}}</td>
+              </tr>
+              <tr>
+                <td class="work">Exercise: Examinature</td>
+                <td class="score">{{student.tree}}</td>
+              </tr>
+              <tr>
+                <td class="work">Final Exam</td>
+                <td class="score">{{final_score}}</td>
               </tr>
             </table>
+            <p class="note">updated on: 1s ago</p>
           </div>
           <div class="calculated">
-            <p>Total: 100%</p>
-            <p>Expected Grade: 4</p>
+            <p>Total: {{total_score}}%</p>
+            <p>Expected Grade: {{grading}}</p>
 
             <br />
             <div class="missing">
               <p>You are missing following work(s):</p>
               <ul>
-                <li>Exercises: Computer Design</li>
-                <li>Examinature</li>
+                <li v-for="work in missingWorks">{{works[work]}}</li>
               </ul>
             </div>
           </div>
@@ -74,7 +101,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-    <script src="./students.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+      integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+      crossorigin="anonymous"
+    ></script>
     <script src="./js/main.js"></script>
   </body>
 </html>
