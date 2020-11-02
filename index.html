@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <center>
+          <div id="searchbox">
+            <img src="./img/icon-search.svg" alt="search-icon" />
+            <input type="text" placeholder="Search Student ID" />
+          </div>
+        </center>
+        <div class="display">
+          <div class="information">
+            <div id="profileImage">
+              <p>BK</p>
+            </div>
+            <div class="name">
+              <h3>{{ name }}</h3>
+              <p>@{{ id }}</p>
+            </div>
+          </div>
+          <div class="middle">
+            <table>
+              <tr>
+                <td class="work">PowerApp: Portfolio</td>
+                <td class="score">23</td>
+              </tr>
+              <tr>
+                <td class="work">PowerApp: BMI Calculator</td>
+                <td class="score">23</td>
+              </tr>
+              <tr>
+                <td class="work">Exercise: CC License</td>
+                <td class="score">23</td>
+              </tr>
+            </table>
+          </div>
+          <div class="calculated">
+            <p>Total: 100%</p>
+            <p>Expected Grade: 4</p>
+
+            <br />
+            <div class="missing">
+              <p>You are missing following work(s):</p>
+              <ul>
+                <li>Exercises: Computer Design</li>
+                <li>Examinature</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          Made with <i class="fa fa-heart pulse red"></i> in Bangkok <br />
+          <a href="mailto:bunnasorn.k@m.materdei.ac.th">Bunnasorn Kaewsiri</a>
+          All Rights Reserved <br />
+
+          This work is licensed under a
+          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+            >Creative Commons Attribution 4.0 International License</a
+          >.
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="./students.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

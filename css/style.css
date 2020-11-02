@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #15202b;
+  font-family: "Prompt", sans-serif;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  margin: auto;
+  width: 85vw;
+  max-width: 600px;
+}
+
+.display {
+  display: grid;
+  grid-template:
+    "search"
+    "information"
+    "middle"
+    "cal"
+    "foot";
+}
+
+#searchbox {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5em;
+  background: #253341;
+  grid-area: search;
+  border: 1px solid #253341;
+  border-radius: 1em;
+  font-family: "Prompt", sans-serif;
+  margin: 1em auto;
+}
+
+#searchbox > input {
+  color: #fff;
+  background: #253341;
+  font-size: 1.5em;
+  outline: none;
+  border: none;
+}
+
+#searchbox:focus {
+  border: 1px solid #1e97e2;
+}
+
+#searchbox::placeholder {
+  color: #70808c;
+}
+
+.information {
+  grid-area: information;
+  display: flex;
+  margin: 2em 0;
+}
+
+.name {
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name > p {
+  color: #657786;
+}
+
+#profileImage {
+  background-color: turquoise;
+  display: flex;
+  justify-content: center;
+
+  width: 5em;
+  height: 5em;
+  border-radius: 2.5em;
+}
+
+#profileImage > p {
+  text-align: center;
+  font-size: 2.5em;
+  line-height: 2em;
+}
+
+.middle {
+  grid-area: middle;
+  border: 1px solid #657786;
+}
+
+.middle > table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.middle > table td {
+  padding: 0.5em 1em;
+  border: solid 1px rgba(101, 119, 134, 0.5);
+}
+
+.middle > table tr:nth-child(even) {
+  background-color: solid 1px rgba(101, 119, 134, 0.5);
+}
+
+.middle > table tr:hover {
+  background-color: rgba(30, 151, 226, 0.2);
+}
+
+.score {
+  text-align: center;
+  width: 20%;
+}
+
+.calculated {
+  grid-area: cal;
+  margin: 2em 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.calculated > .missing {
+  font-size: 1rem;
+  color: #657786;
+}
+
+footer {
+  grid-area: footer;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0.7em;
+  color: #657786;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
+footer > .red {
+  color: #ff4b4b;
+  animation: pound 0.35s infinite alternate;
+  -webkit-animation: pound 0.35s infinite alternate;
+}
+
+@-webkit-keyframes pound {
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pound {
+  to {
+    transform: scale(1.1);
+  }
+}
