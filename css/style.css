@@ -10,6 +10,7 @@ body {
   background-color: #15202b;
   font-family: "Prompt", sans-serif;
   color: #fff;
+  -webkit-appearance: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -63,7 +64,7 @@ li {
 }
 
 #submit {
-  font-size: 1.5em;
+  font-size: 1em;
   margin: 0.5em;
   padding: 0.2em 1em;
   border-radius: 1em;

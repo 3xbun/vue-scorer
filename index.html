@@ -40,7 +40,7 @@
             <img src="./img/icon-search.svg" alt="search-icon" />
             <input
               type="text"
-              placeholder="Search Student ID"
+              placeholder="Search your student ID"
               v-model="id"
               @blur="searching = false"
               @focus="searching = true"
@@ -57,7 +57,9 @@
           </ul>
         </center>
         <center v-if="student.length == 0">
-          <div style="color: #657786" v-if="id == ''">Search your ID . . .</div>
+          <div style="color: #657786" v-if="id == ''">
+            Searching your ID . . .
+          </div>
         </center>
         <div class="display" v-else>
           <div class="information">
@@ -73,20 +75,20 @@
           <div id="authenticator" v-if="!authenticated">
             <center>
               <h1>Enter password</h1>
-              <input
-                class="input"
-                type="password"
-                placeholder="* * * * * * * *"
-                v-model="inputPassword"
-                @click="error = ''"
-              />
-              <br />
-              <input
-                id="submit"
-                type="submit"
-                value="Enter"
-                @click="inputPassword === student.password ? authenticated = true : error = 'wrong password'"
-              />
+              <form
+                @submit.prevent="inputPassword === student.password ? authenticated = true : error = 'wrong password'"
+              >
+                <input
+                  class="input"
+                  type="password"
+                  :placeholder="placeholder"
+                  v-model="inputPassword"
+                  @click="error = ''; placeholder = ''"
+                  @blur="placeholder = '* * * * * * * *'"
+                />
+                <br />
+                <button id="submit" type="submit">Enter</button>
+              </form>
               <div class="error">{{ error }}</div>
             </center>
           </div>
@@ -150,6 +152,13 @@
                       >
                         ?
                       </a>
+                      <a
+                        href="https://materbangkok-my.sharepoint.com/:x:/g/personal/bunnasorn_k_m_materdei_ac_th/EV18gsHpht9OjLhlnlXJDbwBj8qx2uOFPGk87x3mUjx9TA?e=qUrGbi"
+                        v-if="work == 'excel'"
+                        target="_blank"
+                      >
+                        ?
+                      </a>
                     </p>
                   </li>
                 </ul>
@@ -162,7 +171,7 @@
         </div>
 
         <footer>
-          Made with <i class="fa fa-heart pulse red"></i> for Mater Dei School's
+          Made with <i class="fa fa-heart pulse red"></i> for Materdei School's
           Student <br />
           <a href="mailto:bunnasorn.k@m.materdei.ac.th">Bunnasorn Kaewsiri</a>
           All Rights Reserved <br />

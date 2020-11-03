@@ -17,6 +17,7 @@ const app = new Vue({
                 "excel": "Exercise: Excel",
                 "tree": "Exercise: Examinature"
             },
+            placeholder: '* * * * * * * *',
             inputPassword: ''
         }
     },
