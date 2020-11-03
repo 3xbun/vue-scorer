@@ -162,6 +162,10 @@ li {
   text-align: center;
 }
 
+.error {
+  color: #ff4b4b;
+}
+
 #authenticated {
   grid-area: center;
 }

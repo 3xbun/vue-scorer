@@ -3,6 +3,8 @@ const app = new Vue({
     data() {
         return {
             students: [],
+            last_updated: '',
+            error: '',
             searching: false,
             authenticated: false,
             id: '',
@@ -70,7 +72,8 @@ const app = new Vue({
         }
     },
     mounted() {
-        axios.get('https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/').then(res => (this.students = res.data['m2']))
+        axios.get('https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/').then(res => (this.students = res.data['m2']));
+        axios.get('https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/').then(res => (this.last_updated = res.data['last_updated']));
     }
     
 })

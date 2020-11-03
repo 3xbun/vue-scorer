@@ -57,7 +57,7 @@
           </ul>
         </center>
         <center v-if="student.length == 0">
-          <div class="error">Search your ID . . .</div>
+          <div style="color: #657786" v-if="id == ''">Search your ID . . .</div>
         </center>
         <div class="display" v-else>
           <div class="information">
@@ -78,14 +78,16 @@
                 type="password"
                 placeholder="* * * * * * * *"
                 v-model="inputPassword"
+                @click="error = ''"
               />
               <br />
               <input
                 id="submit"
                 type="submit"
                 value="Enter"
-                @click="inputPassword === student.password ? authenticated = true : authenticated = false"
+                @click="inputPassword === student.password ? authenticated = true : error = 'wrong password'"
               />
+              <div class="error">{{ error }}</div>
             </center>
           </div>
 
@@ -121,7 +123,7 @@
                   <td class="score">{{final_score}}</td>
                 </tr>
               </table>
-              <p class="note">updated on: 1s ago</p>
+              <p class="note">updated on: {{ moment(last_updated) }}</p>
             </div>
             <div class="calculated">
               <p>Total: {{total_score}}%</p>
@@ -161,11 +163,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
-      integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.0"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>
