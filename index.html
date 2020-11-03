@@ -44,7 +44,7 @@
               v-model="id"
               @blur="searching = false"
               @focus="searching = true"
-              @click="authenticated = false"
+              @click="reset()"
             />
           </div>
           <ul id="dropdown" v-if="student.length == 0 && id != ''">
@@ -133,16 +133,29 @@
               <div class="missing">
                 <p>You are missing following work(s):</p>
                 <ul>
-                  <li v-for="work in missingWorks">{{works[work]}}</li>
+                  <li v-for="work in missingWorks">
+                    <p>
+                      {{works[work]}}
+                      <a
+                        href="https://bit.ly/2HnbdKd"
+                        v-if="work == 'comp_design'"
+                        target="_blank"
+                      >
+                        ?
+                      </a>
+                      <a
+                        href="https://bit.ly/37rFQt5"
+                        v-if="work == 'cc_license'"
+                        target="_blank"
+                      >
+                        ?
+                      </a>
+                    </p>
+                  </li>
                 </ul>
               </div>
               <div class="logout">
-                <a
-                  href="#"
-                  @click="authenticated = false; student = []; inputPassword = ''"
-                >
-                  logout
-                </a>
+                <a href="#" @click="reset()"> logout </a>
               </div>
             </div>
           </div>
