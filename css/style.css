@@ -36,7 +36,7 @@ li {
   grid-template:
     "search"
     "information"
-    "middle"
+    "center"
     "cal"
     "foot";
 }
@@ -62,8 +62,20 @@ li {
   width: 100%;
 }
 
-#searchbox:focus {
+#submit {
+  font-size: 1.5em;
+  margin: 0.5em;
+  padding: 0.2em 1em;
+  border-radius: 1em;
   border: 1px solid #1e97e2;
+  background: #1e97e2;
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.focus {
+  border: 1px solid #1e97e2 !important;
 }
 
 #searchbox::placeholder {
@@ -121,26 +133,59 @@ li {
   line-height: 2em;
 }
 
-.middle {
-  grid-area: middle;
+.logout {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.logout a {
+  background: #b90000;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  font-size: 0.5em;
+}
+
+#authenticator {
+  grid-area: center;
+}
+
+.input {
+  color: #fff;
+  background: #253341;
+  font-size: 1.5em;
+  outline: none;
+  border: none;
+  width: 50%;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  text-align: center;
+}
+
+#authenticated {
+  grid-area: center;
+}
+
+.works {
+  grid-area: center;
   border: 1px solid #657786;
 }
 
-.middle > table {
+.works > table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.middle > table td {
+.works > table td {
   padding: 0.5em 1em;
   border: solid 1px rgba(101, 119, 134, 0.5);
 }
 
-.middle > table tr:nth-child(even) {
+.works > table tr:nth-child(even) {
   background-color: solid 1px rgba(101, 119, 134, 0.5);
 }
 
-.middle > table tr:hover {
+.works > table tr:hover {
   background-color: rgba(30, 151, 226, 0.2);
 }
 

@@ -14,13 +14,20 @@
     <div id="app">
       <div class="container">
         <center>
-          <div id="searchbox">
+          <div id="searchbox" :class="{focus: searching}">
             <img src="./img/icon-search.svg" alt="search-icon" />
-            <input type="text" placeholder="Search Student ID" v-model="id" />
+            <input
+              type="text"
+              placeholder="Search Student ID"
+              v-model="id"
+              @blur="searching = false"
+              @focus="searching = true"
+              @click="authenticated = false"
+            />
           </div>
           <ul id="dropdown" v-if="student.length == 0 && id != ''">
             <li v-for="std in currentStudent">
-              <a href="#" @click="student = std">
+              <a href="#" @click="student = std; id= ''">
                 {{ std.name }} {{ std.surname }}
                 <span class="username">@{{ std.id }}</span>
               </a>
@@ -40,55 +47,86 @@
               <p>@{{ student.id }}</p>
             </div>
           </div>
-          <div class="middle">
-            <table>
-              <tr>
-                <td class="work">PowerApp: Portfolio</td>
-                <td class="score">{{student.portfolio}}</td>
-              </tr>
-              <tr>
-                <td class="work">PowerApp: BMI Calculator</td>
-                <td class="score">{{student.bmi}}</td>
-              </tr>
-              <tr>
-                <td class="work">Exercise: Computer Design</td>
-                <td class="score">{{student.comp_design}}</td>
-              </tr>
-              <tr>
-                <td class="work">Exercise: CC License</td>
-                <td class="score">{{student.cc_license}}</td>
-              </tr>
-              <tr>
-                <td class="work">Exercise: Excel</td>
-                <td class="score">{{student.excel}}</td>
-              </tr>
-              <tr>
-                <td class="work">Exercise: Examinature</td>
-                <td class="score">{{student.tree}}</td>
-              </tr>
-              <tr>
-                <td class="work">Final Exam</td>
-                <td class="score">{{final_score}}</td>
-              </tr>
-            </table>
-            <p class="note">updated on: 1s ago</p>
-          </div>
-          <div class="calculated">
-            <p>Total: {{total_score}}%</p>
-            <p>Expected Grade: {{grading}}</p>
 
-            <br />
-            <div class="missing">
-              <p>You are missing following work(s):</p>
-              <ul>
-                <li v-for="work in missingWorks">{{works[work]}}</li>
-              </ul>
+          <div id="authenticator" v-if="!authenticated">
+            <center>
+              <h1>Enter password</h1>
+              <input
+                class="input"
+                type="password"
+                placeholder="* * * * * * * *"
+                v-model="inputPassword"
+              />
+              <br />
+              <input
+                id="submit"
+                type="submit"
+                value="Enter"
+                @click="inputPassword === student.password ? authenticated = true : authenticated = false"
+              />
+            </center>
+          </div>
+
+          <div id="authenticated" v-else>
+            <div class="works">
+              <table>
+                <tr>
+                  <td class="work">PowerApp: Portfolio</td>
+                  <td class="score">{{student.portfolio}}</td>
+                </tr>
+                <tr>
+                  <td class="work">PowerApp: BMI Calculator</td>
+                  <td class="score">{{student.bmi}}</td>
+                </tr>
+                <tr>
+                  <td class="work">Exercise: Computer Design</td>
+                  <td class="score">{{student.comp_design}}</td>
+                </tr>
+                <tr>
+                  <td class="work">Exercise: CC License</td>
+                  <td class="score">{{student.cc_license}}</td>
+                </tr>
+                <tr>
+                  <td class="work">Exercise: Excel</td>
+                  <td class="score">{{student.excel}}</td>
+                </tr>
+                <tr>
+                  <td class="work">Exercise: Examinature</td>
+                  <td class="score">{{student.tree}}</td>
+                </tr>
+                <tr>
+                  <td class="work">Final Exam</td>
+                  <td class="score">{{final_score}}</td>
+                </tr>
+              </table>
+              <p class="note">updated on: 1s ago</p>
+            </div>
+            <div class="calculated">
+              <p>Total: {{total_score}}%</p>
+              <p>Expected Grade: {{grading}}</p>
+
+              <br />
+              <div class="missing">
+                <p>You are missing following work(s):</p>
+                <ul>
+                  <li v-for="work in missingWorks">{{works[work]}}</li>
+                </ul>
+              </div>
+              <div class="logout">
+                <a
+                  href="#"
+                  @click="authenticated = false; student = []; inputPassword = ''"
+                >
+                  logout
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <footer>
-          Made with <i class="fa fa-heart pulse red"></i> in Bangkok <br />
+          Made with <i class="fa fa-heart pulse red"></i> for Mater Dei School's
+          Student <br />
           <a href="mailto:bunnasorn.k@m.materdei.ac.th">Bunnasorn Kaewsiri</a>
           All Rights Reserved <br />
 

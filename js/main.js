@@ -3,6 +3,8 @@ const app = new Vue({
     data() {
         return {
             students: [],
+            searching: false,
+            authenticated: false,
             id: '',
             student: [],
             works: {
@@ -12,7 +14,8 @@ const app = new Vue({
                 "cc_license": "Exercise: CC License",
                 "excel": "Exercise: Excel",
                 "tree": "Exercise: Examinature"
-            }
+            },
+            inputPassword: ''
         }
     },
     computed: {
@@ -67,7 +70,7 @@ const app = new Vue({
         }
     },
     mounted() {
-        axios.get('https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/3669ab54a7110e33438ebacf04c7d3d53b310951/students.json').then(res => (this.students = res.data['m2']))
+        axios.get('https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/').then(res => (this.students = res.data['m2']))
     }
     
 })
