@@ -77,6 +77,9 @@ const app = new Vue({
             this.student = [];
             this.inputPassword = '';
             this.authenticated = false
+        },
+        formatDate: function (date) {
+            return moment(date).fromNow();
         }
     },
     mounted() {
