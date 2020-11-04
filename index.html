@@ -59,7 +59,10 @@
           </div>
           <ul id="dropdown" v-if="student.length == 0 && id != ''">
             <li v-for="std in currentStudent">
-              <a href="#" @click="student = std; id= ''">
+              <a
+                href="#"
+                @click="student = std; getProfileImage(student.name);id= ''"
+              >
                 {{ std.name }} {{ std.surname }}
                 <span class="username">@{{ std.id }}</span>
               </a>
@@ -77,7 +80,11 @@
         <div class="display" v-else>
           <div class="information">
             <div id="profileImage" :style="{background: profileColor }">
-              <p>{{student.name.charAt(0)}}{{student.surname.charAt(0)}}</p>
+              <img
+                class="profilePicture"
+                :src="getProfileImage(student.name)"
+                alt="profilePicture"
+              />
             </div>
             <div class="name">
               <h3>{{ student.name }} {{ student.surname }}</h3>
@@ -111,7 +118,7 @@
           </div>
 
           <div id="authenticated" v-else>
-            <div class="works animate__animated animate__fadeInUp">
+            <div class="works animate__animated animate__fadeInDown">
               <table>
                 <tr>
                   <td class="work">PowerApp: Portfolio</td>
