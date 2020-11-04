@@ -49,7 +49,7 @@ const app = new Vue({
                 }
             }
 
-            return total + parseFloat(this.final_score);
+            return (total + parseFloat(this.final_score)).toFixed(2);
         },
         grading() {
             const ts = this.total_score
