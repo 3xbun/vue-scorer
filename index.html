@@ -133,7 +133,10 @@
 
               <br />
               <div class="missing">
-                <p>You are missing following work(s):</p>
+                <p v-if="missingWorks.length == 0">
+                  You are not missing any work. Well done!
+                </p>
+                <p v-else>You are missing following work(s):</p>
                 <ul>
                   <li v-for="work in missingWorks">
                     <p>
