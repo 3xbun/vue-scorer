@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
@@ -38,7 +42,11 @@
     <div id="app">
       <div class="container">
         <center>
-          <div id="searchbox" :class="{focus: searching}">
+          <div
+            id="searchbox"
+            :class="{focus: searching}"
+            class="animate__animated animate__fadeInUp"
+          >
             <img src="./img/icon-search.svg" alt="search-icon" />
             <input
               type="text"
@@ -58,7 +66,10 @@
             </li>
           </ul>
         </center>
-        <center v-if="student.length == 0">
+        <center
+          class="animate__animated animate__fadeInUp"
+          v-if="student.length == 0"
+        >
           <div style="color: #657786" v-if="id == ''">
             Searching your ID . . .
           </div>
@@ -74,7 +85,11 @@
             </div>
           </div>
 
-          <div id="authenticator" v-if="!authenticated">
+          <div
+            id="authenticator"
+            class="animate__animated animate__fadeInUp"
+            v-if="!authenticated"
+          >
             <center>
               <h1>Enter password</h1>
               <form
@@ -96,7 +111,7 @@
           </div>
 
           <div id="authenticated" v-else>
-            <div class="works">
+            <div class="works animate__animated animate__fadeInUp">
               <table>
                 <tr>
                   <td class="work">PowerApp: Portfolio</td>
