@@ -152,7 +152,21 @@
               <p class="note">updated on: {{ formatDate(last_updated) }}</p>
             </div>
             <div class="calculated">
-              <p>Total: {{total_score}}%</p>
+              <div id="percircle">
+                <svg>
+                  <circle cx="50%" cy="50%" r="45%"></circle>
+                  <circle
+                    id="progress"
+                    :style="{stroke: progress.color, 'stroke-dashoffset': progress.percent}"
+                    cx="50%"
+                    cy="50%"
+                    r="45%"
+                  ></circle>
+                </svg>
+                <div class="number">
+                  <h2>{{total_score}}<span>%</span></h2>
+                </div>
+              </div>
               <p>Expected Grade: {{grading}}</p>
 
               <br />

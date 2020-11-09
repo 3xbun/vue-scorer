@@ -223,6 +223,62 @@ li {
   color: #657786;
 }
 
+#percircle {
+  width: 2em;
+  height: 2em;
+}
+
+#percircle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+#percircle > .number {
+  position: absolute;
+  font-size: 1em;
+}
+
+.number span {
+  font-size: 1.3rem;
+  color: #657786;
+}
+
+#percircle > svg {
+  width: 10rem;
+  height: 10rem;
+}
+
+circle {
+  fill: none;
+  stroke-width: 0.6rem;
+  stroke: #fff;
+  stroke-dasharray: 452;
+  stroke-dashoffset: 452;
+  stroke-linecap: round;
+}
+
+circle:nth-child(1) {
+  stroke-dashoffset: 0;
+  stroke: #657786;
+}
+
+#progress {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease-in;
+}
+
+@keyframes rotate {
+  to {
+    stroke-dashoffset: 452;
+  }
+}
+
 footer {
   background-color: #15202b;
   grid-area: footer;

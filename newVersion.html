@@ -58,14 +58,17 @@
               @click="reset()"
             />
           </div>
-          <div v-if="error && student.length == 0 && id != ''" class="error">
+          <div
+            v-if="error && currentStudent.length == 0 && id != ''"
+            class="error"
+          >
             {{ error }}
           </div>
           <ul id="dropdown" v-if="student.length == 0 && id != ''">
             <li v-for="std in currentStudent">
               <a
                 href="#"
-                @click="student = std; getProfileImage(student.name); getScore(std.id); id= ''"
+                @click="student = std; getProfileImage(student.name); getScore(std.id); id= ''; error=''"
               >
                 {{ std.name }} {{ std.surname }}
                 <span class="username">@{{ std.id }}</span>

@@ -107,7 +107,7 @@ const app = new Vue({
     },
     getScore: function (id) {
       axios.get(`${this.api}scores/${id}`).then((res) => {
-        this.score = res.data[0];
+        res.data[0] ? (this.score = res.data[0]) : (this.score = []);
       });
     },
     reset: function () {

@@ -23,6 +23,23 @@ const app = new Vue({
     };
   },
   computed: {
+    progress() {
+      const pg = {};
+      const ts = this.total_score;
+      pg.percent = 452 - (452 * ts) / 100;
+
+      if (ts > 80) {
+        pg.color = "#58D68D";
+      } else if (ts > 70) {
+        pg.color = "#F4D03F";
+      } else if (ts > 60) {
+        pg.color = "#EB984E";
+      } else {
+        pg.color = "#EC7063";
+      }
+
+      return pg;
+    },
     currentStudent() {
       return this.students
         .filter((std) => std.id.startsWith(this.id))
