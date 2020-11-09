@@ -3,6 +3,7 @@ const app = new Vue({
   data() {
     return {
       students: [],
+      visitors: "",
       last_updated: "",
       error: "",
       searching: false,
@@ -110,6 +111,9 @@ const app = new Vue({
     axios[_0xfba2[5]](_0xfba2[4])[_0xfba2[3]]((_0x3e7dx1) => {
       return (this[_0xfba2[6]] = _0x3e7dx1[_0xfba2[2]][_0xfba2[6]]);
     });
+    axios
+      .get("https://api.countapi.xyz/hit/3xbun.me/vue-scorer")
+      .then((res) => (this.visitors = res.data.value));
   },
 });
 
