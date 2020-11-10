@@ -48,7 +48,7 @@ li {
     "foot";
 }
 
-#send {
+.btn {
   background-color: rgba(37, 51, 65, 0.5);
   font-size: 0.9rem;
   color: #657786;
@@ -63,18 +63,18 @@ li {
   margin: 1em auto;
 }
 
-#send:hover {
+.btn:hover {
   color: #fff;
   font-size: 1rem;
   border: 2px solid #1e97e2;
 }
 
-#send i {
+.btn i {
   color: #657786;
   transition: all 0.2s ease-in;
 }
 
-#send:hover i {
+.btn:hover i {
   color: #1e97e2;
 }
 
@@ -257,6 +257,20 @@ li {
 .calculated > .missing {
   font-size: 1rem;
   color: #657786;
+}
+
+#final span,
+#final p {
+  display: inline-block;
+}
+
+#final span {
+  float: right;
+  color: #ff4b4b;
+}
+
+#final span:hover {
+  text-decoration: underline;
 }
 
 #percircle {
