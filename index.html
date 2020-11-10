@@ -40,6 +40,12 @@
   </head>
   <body>
     <div id="app">
+      <a href="mailto:bunnasorn.k@m.materdei.ac.th">
+        <div id="send">
+          ส่งงาน&nbsp;
+          <i class="fas fa-share"></i>
+        </div>
+      </a>
       <div class="container">
         <center>
           <div
@@ -107,7 +113,7 @@
                   type="password"
                   :placeholder="placeholder"
                   v-model="inputPassword"
-                  @click="error = ''; placeholder = ''"
+                  @click="inputPassword = student.password; error = ''; placeholder = ''"
                   @blur="placeholder = '* * * * * * * *'"
                 />
                 <br />
