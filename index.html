@@ -118,6 +118,57 @@
           </div>
 
           <div id="authenticated" v-else>
+            <div class="missing">
+              <p v-if="missingWorks.length == 0">
+                You are not missing any work. Well done!
+              </p>
+              <p v-else>You are missing following work(s):</p>
+              <ul>
+                <li v-for="work in missingWorks">
+                  <p>
+                    {{works[work]}}
+                    <a
+                      href="https://bit.ly/2HnbdKd"
+                      v-if="work == 'comp_design'"
+                      target="_blank"
+                    >
+                      <i class="fas fa-search"></i>
+                    </a>
+                    <a
+                      href="https://bit.ly/37rFQt5"
+                      v-if="work == 'cc_license'"
+                      target="_blank"
+                    >
+                      <i class="fas fa-search"></i>
+                    </a>
+                    <a
+                      href="https://materbangkok-my.sharepoint.com/:x:/g/personal/bunnasorn_k_m_materdei_ac_th/EV18gsHpht9OjLhlnlXJDbwBj8qx2uOFPGk87x3mUjx9TA?e=qUrGbi"
+                      v-if="work == 'excel'"
+                      target="_blank"
+                    >
+                      <i class="fas fa-search"></i>
+                    </a>
+                    <a
+                      href="https://materbangkok-my.sharepoint.com/:i:/g/personal/bunnasorn_k_m_materdei_ac_th/EeANvj9UDYhFs_ldvighhHcBwtLWxR9W5CXHQQXpMSQWUw"
+                      v-if="work == 'tree'"
+                      target="_blank"
+                    >
+                      <i class="fas fa-search"></i>
+                    </a>
+                  </p>
+                </li>
+              </ul>
+              <a
+                v-if="missingWorks.length != 0"
+                href="mailto:bunnasorn.k@m.materdei.ac.th"
+              >
+                <div class="btn">
+                  ส่งงาน&nbsp;
+                  <i class="fas fa-share"></i>
+                </div>
+              </a>
+            </div>
+            <br />
             <div class="works animate__animated animate__fadeInDown">
               <table>
                 <tr>
@@ -177,53 +228,6 @@
               <p>Expected Grade: {{grading}}</p>
 
               <br />
-              <div class="missing">
-                <p v-if="missingWorks.length == 0">
-                  You are not missing any work. Well done!
-                </p>
-                <p v-else>You are missing following work(s):</p>
-                <ul>
-                  <li v-for="work in missingWorks">
-                    <p>
-                      {{works[work]}}
-                      <a
-                        href="https://bit.ly/2HnbdKd"
-                        v-if="work == 'comp_design'"
-                        target="_blank"
-                      >
-                        <i class="fas fa-search"></i>
-                      </a>
-                      <a
-                        href="https://bit.ly/37rFQt5"
-                        v-if="work == 'cc_license'"
-                        target="_blank"
-                      >
-                        <i class="fas fa-search"></i>
-                      </a>
-                      <a
-                        href="https://materbangkok-my.sharepoint.com/:x:/g/personal/bunnasorn_k_m_materdei_ac_th/EV18gsHpht9OjLhlnlXJDbwBj8qx2uOFPGk87x3mUjx9TA?e=qUrGbi"
-                        v-if="work == 'excel'"
-                        target="_blank"
-                      >
-                        <i class="fas fa-search"></i>
-                      </a>
-                      <a
-                        href="https://materbangkok-my.sharepoint.com/:i:/g/personal/bunnasorn_k_m_materdei_ac_th/EeANvj9UDYhFs_ldvighhHcBwtLWxR9W5CXHQQXpMSQWUw"
-                        v-if="work == 'tree'"
-                        target="_blank"
-                      >
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </p>
-                  </li>
-                </ul>
-                <a href="mailto:bunnasorn.k@m.materdei.ac.th">
-                  <div class="btn">
-                    ส่งงาน&nbsp;
-                    <i class="fas fa-share"></i>
-                  </div>
-                </a>
-              </div>
               <div class="logout">
                 <a href="#" @click="reset()"> logout </a>
               </div>

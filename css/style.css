@@ -178,7 +178,7 @@ li {
 .logout {
   display: flex;
   justify-content: center;
-  padding: 1em;
+  /* padding: 1em; */
 }
 
 .logout a {
@@ -254,9 +254,10 @@ li {
   text-align: center;
 }
 
-.calculated > .missing {
+.missing {
   font-size: 1rem;
   color: #657786;
+  text-align: center;
 }
 
 #final span,
