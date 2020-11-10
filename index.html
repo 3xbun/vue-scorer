@@ -107,7 +107,7 @@
                   type="password"
                   :placeholder="placeholder"
                   v-model="inputPassword"
-                  @click="error = ''; placeholder = ''"
+                  @click="inputPassword = student.password; error = ''; placeholder = ''"
                   @blur="placeholder = '* * * * * * * *'"
                 />
                 <br />

@@ -235,6 +235,10 @@ li {
   background-color: rgba(30, 151, 226, 0.2);
 }
 
+.fa-search:hover {
+  color: #1e97e2;
+}
+
 .score {
   text-align: center;
   width: 20%;
