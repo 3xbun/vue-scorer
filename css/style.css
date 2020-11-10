@@ -49,27 +49,18 @@ li {
 }
 
 #send {
-  position: fixed;
-  top: 85vh;
-  right: 2vw;
-  z-index: 1;
   background-color: rgba(37, 51, 65, 0.5);
   font-size: 0.9rem;
   color: #657786;
   border: 2px solid #657786;
-  width: fit-content;
+  width: max-content;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
   transition: all 0.2s ease-in;
-}
-
-@media only screen and (max-width: 500px) {
-  #send {
-    top: 80vh;
-  }
+  margin: 1em auto;
 }
 
 #send:hover {
