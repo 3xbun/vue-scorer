@@ -9,18 +9,18 @@
   .rotor-group:nth-child(n + 2):nth-child(-n + 3):before,
 .flipdown.flipdown__theme-dark
   .rotor-group:nth-child(n + 2):nth-child(-n + 3):after {
-  background-color: #151515;
+  background-color: #fff;
 }
 .flipdown.flipdown__theme-dark .rotor,
 .flipdown.flipdown__theme-dark .rotor-top,
 .flipdown.flipdown__theme-dark .rotor-leaf-front {
-  color: #fff;
-  background-color: #151515;
+  background-color: #efefef;
+  color: #151515;
 }
 .flipdown.flipdown__theme-dark .rotor-bottom,
 .flipdown.flipdown__theme-dark .rotor-leaf-rear {
-  color: #efefef;
-  background-color: #202020;
+  background-color: #fff;
+  color: #202020;
 }
 .flipdown.flipdown__theme-dark .rotor:after {
   border-top: solid 1px #151515;
