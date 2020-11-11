@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>สอบซ่อม - MD Vue Scorer</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/flipdown.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -33,6 +34,12 @@
     <meta name="msapplication-TileColor" content="#00a300" />
     <meta name="msapplication-config" content="./favicon/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
+    <style>
+      .disabled {
+        pointer-events: none;
+        color: #ccc;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -60,15 +67,19 @@
           <a
             href="https://materbangkok-my.sharepoint.com/:f:/g/personal/bunnasorn_k_m_materdei_ac_th/EmYZDssPiUZNtGy6XRp9x0IB16RtSmWLbKPrDKKTjIwJJw"
             target="_blank"
+            id="send"
+            class="btn"
           >
-            <div class="btn">ส่งข้อสอบ</div>
+            ส่งข้อสอบ
           </a>
 
           <br />
 
-          <div class="error">
+          <div id="error" class="error">
             ส่งได้ไม่เกินวันศุกร์ที่ 13 พฤศจิกายน 2563 เวลา 12:00
           </div>
+          <br />
+          <div id="flipdown" class="flipdown"></div>
         </center>
 
         <footer>
@@ -86,6 +97,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="./js/flipdown.min.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+      const error = document.querySelector("#error");
+      const send = document.querySelector("#send");
+
+      const flipdown = new FlipDown(1605268800);
+      flipdown.start();
+      flipdown.ifEnded(() => {
+        send.innerHTML = "<strike>ส่งข้อสอบ</strike>";
+        send.classList.add("disabled");
+        error.innerHTML = "หมดเวลาส่งข้อสอบ";
+      });
+    </script>
   </body>
 </html>
