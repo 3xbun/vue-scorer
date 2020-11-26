@@ -3,6 +3,8 @@ const app = new Vue({
   data() {
     return {
       students: [],
+      data:
+        "https://gist.githubusercontent.com/3xbun/fd57e85333d4e089f7deda435c2ce65b/raw",
       visitors: "",
       last_updated: "",
       error: "",
@@ -127,7 +129,7 @@ const app = new Vue({
 
     axios
       .get(
-        "https://gist.githubusercontent.com/3xbun/91344e52ce242e2a3b9fba02a8e9972f/raw/students.json"
+        `${this.data}`
       )
       .then((res) => {
         this.last_updated = res.data.pop().last_updated;
