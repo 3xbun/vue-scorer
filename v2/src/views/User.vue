@@ -43,19 +43,16 @@ export default {
     const id = computed(() => route.params.id);
 
     const state = reactive({
+      apiURL: "https://vue-scorer-api.herokuapp.com",
       student: {},
     });
 
     onMounted(() => {
-      axios
-        .get(
-          "https://gist.githubusercontent.com/3xbun/fd57e85333d4e089f7deda435c2ce65b/raw"
-        )
-        .then((res) =>
-          res.data.filter((std) => {
-            if (std.id == id.value) state.student = std;
-          })
-        );
+      const promist = axios.get(
+        `${state.apiURL}/api/students/${route.params.id}`
+      );
+
+      promist.then((res) => (state.student = res.data[0]));
     });
 
     const getProfileImage = (seed) =>
