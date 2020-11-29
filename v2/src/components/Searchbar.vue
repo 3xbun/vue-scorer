@@ -30,23 +30,31 @@
 </template>
 
 <script>
-import { reactive, computed } from "vue";
-import { Students } from "../assets/Students";
+import { reactive, computed, onMounted } from "vue";
+// import { Students } from "../assets/Students";
 import Loader from "./Loader";
+import axios from "axios";
 
 export default {
   setup() {
     const state = reactive({
+      apiURL: "https://vue-scorer-api.herokuapp.com",
       searching: false,
       last_updated: "",
       id: "",
-      students: Students,
+      students: [],
       student: {},
       currentStudent: computed(() => {
         return state.students
           .filter((std) => std.id.startsWith(state.id))
           .slice(0, 3);
       }),
+    });
+
+    onMounted(() => {
+      const promist = axios.get(`${state.apiURL}/api/students`);
+
+      promist.then((res) => (state.students = res.data));
     });
 
     return { state };
