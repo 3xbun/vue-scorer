@@ -16,19 +16,7 @@
         <p>@{{ state.student.id }}</p>
       </div>
     </div>
-    <!-- <div class="information">
-      <div id="profileImage" :style="{ background: profileColor }">
-        <img
-          class="profilePicture"
-          :src="getProfileImage(student.name)"
-          alt="profilePicture"
-        />
-      </div>
-      <div class="name">
-        <h3>{{ student.name }} {{ student.surname }}</h3>
-        <p>@{{ student.id }}</p>
-      </div>
-    </div> -->
+    <Authenticator />
   </div>
 </template>
 
@@ -36,8 +24,10 @@
 import { computed, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import Authenticator from "../components/Authenticator";
 
 export default {
+  components: { Authenticator },
   setup() {
     const route = useRoute();
     const id = computed(() => route.params.id);
