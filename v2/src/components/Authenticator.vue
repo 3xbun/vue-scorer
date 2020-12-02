@@ -2,17 +2,64 @@
   <div id="authenticator">
     <center>
       <h1>กรอกรหัสผ่าน</h1>
-      <form>
-        <input type="password" class="input" /> <br />
+      <form @submit.prevent="authenticate">
+        <input
+          type="password"
+          class="input"
+          :placeholder="state.placeholder"
+          v-model="state.inputPassword"
+          @click="state.result = ''"
+        />
+        <br />
         <button type="submit">ตกลง</button>
       </form>
-      <div class="error">* error *</div>
+      <div class="error" v-if="state.showErr">
+        {{ state.result }}
+      </div>
     </center>
   </div>
 </template>
 
 <script>
-export default {};
+import { reactive, watch } from "vue";
+
+export default {
+  props: {
+    result: {
+      type: Number,
+      default: 404,
+    },
+  },
+  setup(props, ctx) {
+    const state = reactive({
+      apiURL: "https://vue-scorer-api.herokuapp.com",
+      placeholder: "* * * * * * * *",
+      inputPassword: "",
+      isAuthenticate: Boolean,
+      result: "",
+      showErr: false,
+    });
+
+    const authenticate = () => {
+      ctx.emit("password", state.inputPassword);
+      return;
+    };
+
+    watch(
+      () => props.result,
+      (result) => {
+        if (result === 404) {
+          state.showErr = true;
+          state.result = "กรุณากรอกรหัสผ่าน";
+        } else if (result === 200) {
+          state.showErr = false;
+        }
+      }
+    );
+
+    return { state, authenticate };
+  },
+};
 </script>
 
 <style scoped>

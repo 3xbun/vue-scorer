@@ -16,7 +16,9 @@
         <p>@{{ state.student.id }}</p>
       </div>
     </div>
-    <Authenticator />
+
+    <h1 v-if="state.isAuthenticate">Information</h1>
+    <Authenticator v-else @password="authenticate" :result="state.result" />
   </div>
 </template>
 
@@ -35,7 +37,42 @@ export default {
     const state = reactive({
       apiURL: "https://vue-scorer-api.herokuapp.com",
       student: {},
+      isAuthenticate: false,
+      result: "",
     });
+
+    const authenticate = (password) => {
+      console.log(password);
+      if (!password) {
+        state.result = 404;
+      } else {
+        state.result = 200;
+
+        const promise = axios.post(
+          `${state.apiURL}/api/students/authenticate/${route.params.id}`,
+          {
+            password: password,
+          }
+        );
+
+        promise.then((res) => {
+          console.log(res.data);
+          if (res.data.err) {
+            state.result = 401;
+            state.isAuthenticate = false;
+          } else if (res.data.msg === "Authenticated") {
+            console.log("Authenticated");
+            state.isAuthenticate = true;
+          } else {
+            state.result = 500;
+            state.isAuthenticate = false;
+            state.result = "เกิดข้อผิดพลาด";
+          }
+        });
+      }
+
+      return state.result;
+    };
 
     onMounted(() => {
       const promist = axios.get(
@@ -48,7 +85,7 @@ export default {
     const getProfileImage = (seed) =>
       `https://avatars.dicebear.com/api/avataaars/${seed}.svg?top[]=longHair&skin[]=tanned&skin[]=pale&skin[]=light`;
 
-    return { id, getProfileImage, state };
+    return { id, getProfileImage, state, authenticate };
   },
 };
 </script>
