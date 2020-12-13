@@ -18,14 +18,14 @@ export default {};
 
 <style>
 footer {
-  background-color: #15202b;
+  background-color: var(--black);
   grid-area: footer;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   font-size: 0.7em;
-  color: #657786;
+  color: var(--grey);
   padding: 0.5em 1em;
   text-align: center;
 }

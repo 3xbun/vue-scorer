@@ -13,7 +13,7 @@
       </div>
       <Loader v-if="!state.searching && state.students.length == 0" />
       <ul id="dropdown" v-if="state.id">
-        <router-link
+        <!-- <router-link
           v-for="std in state.currentStudent"
           :key="std.id"
           :to="{ name: 'User', params: { id: std.id } }"
@@ -23,24 +23,35 @@
             {{ std.name }} {{ std.surname }}
             <span class="username">@{{ std.id }}</span>
           </li>
-        </router-link>
+        </router-link> -->
+
+        <a
+          v-for="std in state.currentStudent"
+          href="#"
+          :key="std.id"
+          @click="student.selectedStudent = std"
+        >
+          <li>
+            {{ std.name }} {{ std.surname }}
+            <span class="username">@{{ std.id }}</span>
+          </li>
+        </a>
       </ul>
     </center>
   </div>
 </template>
 
 <script>
-import { reactive, computed, onMounted } from "vue";
-// import { Students } from "../assets/Students";
+import { reactive, computed, onMounted, inject } from "vue";
 import Loader from "./Loader";
 import axios from "axios";
 
 export default {
   setup() {
+    const global = inject("global");
+    const student = inject("student");
     const state = reactive({
-      apiURL: "https://vue-scorer-api.herokuapp.com",
       searching: false,
-      last_updated: "",
       id: "",
       students: [],
       student: {},
@@ -52,12 +63,12 @@ export default {
     });
 
     onMounted(() => {
-      const promist = axios.get(`${state.apiURL}/api/students`);
+      const promise = axios.get(`${global.apiURL}/api/students`);
 
-      promist.then((res) => (state.students = res.data));
+      promise.then((res) => (state.students = res.data));
     });
 
-    return { state };
+    return { state, student };
   },
   components: {
     Loader,
@@ -85,7 +96,7 @@ export default {
 
 input {
   font-family: inherit;
-  color: #fff;
+  color: var(--white);
   background: none;
   font-size: 1.5em;
   outline: none;
@@ -107,7 +118,7 @@ input[type="number"] {
 
 i {
   font-size: 1.5em;
-  color: #727273;
+  color: var(--grey);
   line-height: 130%;
 }
 
@@ -125,7 +136,7 @@ i {
 }
 
 .username {
-  color: #1e97e2;
+  color: var(--blue);
   font-size: 0.8em;
 }
 </style>

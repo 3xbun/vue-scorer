@@ -17,75 +17,54 @@
       </div>
     </div>
 
-    <h1 v-if="state.isAuthenticate">Information</h1>
-    <Authenticator v-else @password="authenticate" :result="state.result" />
+    <center>
+      <router-link
+        @click="global.isLogin = false"
+        id="logout"
+        :to="{ name: 'Home' }"
+      >
+        ออกจากระบบ
+      </router-link>
+    </center>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from "vue";
+import { computed, onMounted, reactive, inject } from "vue";
 import { useRoute } from "vue-router";
+import routes from "../router";
 import axios from "axios";
-import Authenticator from "../components/Authenticator";
 
 export default {
-  components: { Authenticator },
   setup() {
+    const global = inject("global");
     const route = useRoute();
     const id = computed(() => route.params.id);
 
     const state = reactive({
-      apiURL: "https://vue-scorer-api.herokuapp.com",
       student: {},
-      isAuthenticate: false,
-      result: "",
     });
 
-    const authenticate = (password) => {
-      console.log(password);
-      if (!password) {
-        state.result = 404;
-      } else {
-        state.result = 200;
-
-        const promise = axios.post(
-          `${state.apiURL}/api/students/authenticate/${route.params.id}`,
-          {
-            password: password,
-          }
-        );
-
-        promise.then((res) => {
-          console.log(res.data);
-          if (res.data.err) {
-            state.result = 401;
-            state.isAuthenticate = false;
-          } else if (res.data.msg === "Authenticated") {
-            console.log("Authenticated");
-            state.isAuthenticate = true;
-          } else {
-            state.result = 500;
-            state.isAuthenticate = false;
-            state.result = "เกิดข้อผิดพลาด";
-          }
-        });
+    onMounted(() => {
+      if (!global.isLogin) {
+        routes.push({ name: "Login" });
       }
 
-      return state.result;
-    };
+      if (route.params.id === "admin") {
+        routes.push({ name: "Admin Dashboard" });
+      }
 
-    onMounted(() => {
-      const promist = axios.get(
-        `${state.apiURL}/api/students/${route.params.id}`
+      const promise = axios.get(
+        `${global.apiURL}/api/students/${route.params.id}`
       );
 
-      promist.then((res) => (state.student = res.data[0]));
+      promise.then((res) => (state.student = res.data[0]));
     });
 
     const getProfileImage = (seed) =>
       `https://avatars.dicebear.com/api/avataaars/${seed}.svg?top[]=longHair&skin[]=tanned&skin[]=pale&skin[]=light`;
 
-    return { id, getProfileImage, state, authenticate };
+    return { id, getProfileImage, state, global };
   },
 };
 </script>
@@ -123,5 +102,13 @@ export default {
 .profilePicture {
   width: 100%;
   border-radius: 50%;
+}
+
+#logout {
+  display: block;
+  background: var(--red);
+  border-radius: 1em;
+  width: fit-content;
+  padding: 0.5em 1em;
 }
 </style>

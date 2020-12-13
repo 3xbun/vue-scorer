@@ -1,26 +1,43 @@
 <template>
   <div class="container">
-    <Searchbar />
     <router-view />
     <Footer />
   </div>
 </template>
 
 <script>
-import Searchbar from "./components/Searchbar";
+import { provide, reactive } from "vue";
 import Footer from "./components/Footer";
 
 export default {
   name: "App",
   components: {
-    Searchbar,
     Footer,
+  },
+  setup() {
+    const global = reactive({
+      isLogin: false,
+      apiURL: "http://localhost:8080",
+    });
+
+    provide("global", global);
   },
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
+
+:root {
+  --blue: #1da1f2;
+  --dark-blue: #243447;
+  --white: #fff;
+  --black: #151e29;
+  --red: #b00020;
+  --grey: #657786;
+  --light-grey: #aab8c2;
+  --dark-grey: #1b2737;
+}
 
 * {
   padding: 0;
@@ -39,9 +56,9 @@ li {
 }
 
 body {
-  background: #15202b;
+  background: var(--black);
   font-family: "Prompt", sans-serif;
-  color: #fff;
+  color: var(--white);
 }
 
 .container {
