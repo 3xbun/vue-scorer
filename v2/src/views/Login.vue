@@ -50,7 +50,6 @@ export default {
   setup() {
     const global = inject("global");
     const state = reactive({
-      apiURL: "http://localhost:8080",
       selected: "",
       username: "",
       password: "",
@@ -70,7 +69,7 @@ export default {
 
     const authenticate = () => {
       const promise = axios
-        .post(`${state.apiURL}/api/students/authenticate/${state.username}`, {
+        .post(`${global.apiURL}/api/students/authenticate/${state.username}`, {
           password: state.password,
         })
         .catch((err) => console.log(err));
@@ -78,6 +77,9 @@ export default {
       promise.then((res) => {
         console.table(res);
         if (res.data.status === 200) {
+          state.username === "admin"
+            ? (global.isAdmin = true)
+            : (global.isAdmin = false);
           global.isLogin = true;
           state.msg = "กำลังเข้าสู่ระบบ . . .";
           routes.push({ name: "User", params: { id: state.username } });
