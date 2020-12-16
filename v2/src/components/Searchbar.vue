@@ -13,21 +13,8 @@
       </div>
       <Loader v-if="!state.searching && state.students.length == 0" />
       <ul id="dropdown" v-if="state.id">
-        <!-- <router-link
-          v-for="std in state.currentStudent"
-          :key="std.id"
-          :to="{ name: 'User', params: { id: std.id } }"
-          @click="state.id = ''"
-        >
-          <li>
-            {{ std.name }} {{ std.surname }}
-            <span class="username">@{{ std.id }}</span>
-          </li>
-        </router-link> -->
-
         <a
           v-for="std in state.currentStudent"
-          href="#"
           :key="std.id"
           @click="student.selectedStudent = std"
         >
@@ -88,6 +75,10 @@ export default {
   font-family: "Prompt", sans-serif;
   margin: 1em auto;
   height: 3em;
+}
+
+a {
+  cursor: pointer;
 }
 
 .focus {
