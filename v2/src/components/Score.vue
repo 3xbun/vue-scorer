@@ -1,59 +1,113 @@
 <template>
   <div id="score">
     <table>
-      <tr v-for="(score, key) in state.scores" :key="key">
-        <td>{{ state.works.filter((work) => work.key === key)[0].name }}</td>
-        <td>{{ score }}</td>
+      <tr v-for="(work, key) in state.works" :key="key">
+        <td class="work">{{ work.name }}</td>
+        <td v-if="state.scores && state.scores[work.key]" class="score">
+          {{ state.scores[work.key] }}
+        </td>
+        <td v-else class="score grey">0</td>
       </tr>
     </table>
 
     <p class="updatedAt">อัพเดทเมื่อ {{ state.updatedAt }}</p>
 
-    <div class="btn">
-      เพิ่มคะแนน
+    <div class="btn" v-if="global.isAdmin" @click="state.showModal = true">
+      กรอกคะแนน
     </div>
+  </div>
+
+  <div v-if="state.showModal" class="modal">
+    <form @submit.prevent="submit()" id="scores">
+      <table v-for="(work, key) in state.works" :key="key">
+        <td class="work">{{ work.name }}</td>
+        <td class="inputScore">
+          <input type="number" v-model="state.inputScores[work.key]" />
+        </td>
+      </table>
+      <center>
+        <input type="submit" value="ตกลง" class="add" />
+        <div class="cancel" @click="state.showModal = false">ยกเลิก</div>
+      </center>
+    </form>
   </div>
 </template>
 
 <script>
 import moment from "moment";
 import axios from "axios";
-import { inject, onMounted, reactive, watch } from "vue";
+import { computed, inject, onMounted, reactive, watch } from "vue";
 
 export default {
   setup() {
     const global = inject("global");
     const student = inject("student");
     const state = reactive({
+      showModal: false,
       works: {},
       scores: {},
+      inputScores: computed(() => {
+        let scores = {};
+        for (let work in state.works) {
+          const key = state.works[work].key;
+          let value = 0;
+
+          if (state.scores) value = state.scores[key] || 0;
+
+          scores[key] = value;
+        }
+
+        return scores;
+      }),
       updatedAt: "",
     });
 
     const readScore = () => {
+      state.scores = {};
       const promise = axios.get(
         `${global.apiURL}/api/scores/${student.selectedStudent.id}`
       );
       promise.then((res) => {
-        state.scores = res.data[0].works[0];
+        state.scores = res.data[0].works;
         moment.locale("th");
         const date = res.data[0].updatedAt;
         state.updatedAt = moment(date, "YYYY-MM-DDTHH:mm:ss.sssZ").fromNow();
       });
     };
 
+    const readWork = () => {
+      const promise = axios.get(`${global.apiURL}/api/works`);
+      promise.then((res) => (state.works = res.data));
+    };
+
+    const submit = () => {
+      state.showModal = false;
+      console.log(state.inputScores);
+      const promise = axios.post(
+        `${global.apiURL}/api/scores/${student.selectedStudent.id}`,
+        state.inputScores
+      );
+
+      promise.then((res) => {
+        console.log(res.data);
+        readScore();
+      });
+    };
+
     watch(
       () => student.selectedStudent.id,
-      () => readScore()
+      () => {
+        readScore();
+        readWork();
+      }
     );
 
     onMounted(() => {
-      const promise = axios.get(`${global.apiURL}/api/works`);
-
-      promise.then((res) => (state.works = res.data));
+      readScore();
+      readWork();
     });
 
-    return { state };
+    return { state, global, submit };
   },
 };
 </script>
@@ -93,5 +147,80 @@ td {
 
 .btn:hover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.grey {
+  color: var(--grey);
+}
+
+.score {
+  text-align: center;
+  width: 20%;
+}
+
+.modal {
+  background: var(--dark-blue);
+  padding: 1em;
+  border-radius: 1em;
+  width: 50vw;
+  max-width: 500px;
+  position: fixed;
+  top: 10vh;
+  z-index: 1;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+input {
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  background: none;
+  text-align: center;
+  color: var(--white);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  outline: none;
+}
+
+/* Firefox */
+input[type="number"] {
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.inputScore {
+  width: 20%;
+  padding: 0;
+  background: var(--dark-grey);
+}
+
+.add {
+  margin: 1em auto;
+  cursor: pointer;
+  width: fit-content;
+  padding: 0.5em 1em;
+  background: var(--blue);
+  border-radius: 1em;
+  color: var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.add:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.cancel {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--white);
+  filter: brightness(70%);
+  margin: auto;
 }
 </style>
