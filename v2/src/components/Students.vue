@@ -21,16 +21,14 @@
           <span class="id"> @{{ student.selectedStudent.id }}</span>
         </p>
         <br />
-        <div class="score">
-          <Score />
-        </div>
+        <Score />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, provide, reactive } from "vue";
+import { computed, provide, reactive, inject } from "vue";
 import Searchbar from "./Searchbar";
 import Score from "./Score";
 export default {
@@ -39,6 +37,7 @@ export default {
     Score,
   },
   setup() {
+    const global = inject("global");
     const student = reactive({
       selectedStudent: {},
       fullName: computed(
@@ -52,7 +51,7 @@ export default {
     const profileImage = (seed) =>
       `https://avatars.dicebear.com/api/avataaars/${seed}.svg?top[]=longHair&skin[]=tanned&skin[]=pale&skin[]=light`;
 
-    return { student, profileImage };
+    return { student, profileImage, global };
   },
 };
 </script>
