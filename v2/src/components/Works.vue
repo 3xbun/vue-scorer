@@ -34,6 +34,7 @@
           @click="
             state.title = 'แก้ไขงาน';
             state.showModal = true;
+            state.editing = true;
             state.work = work;
           "
           >แก้ไข</span
@@ -53,36 +54,37 @@
 
     <div v-if="state.showModal" class="modal">
       <h1>{{ state.title }}</h1>
-      <form @submit.prevent="addWork()">
+      <form @submit.prevent="submit()">
         <label for="name">ชื่องาน</label>
         <input
           type="text"
-          placeholder="ชื่องาน"
+          placeholder="ใบกิจกรรมเรื่อง xxxx"
           v-model="state.work.name"
+          required
+        />
+        <label for="key">รหัสชิ้นงาน</label>
+        <input
+          type="text"
+          placeholder="sheet(x)"
+          v-model="state.work.key"
           required
         />
         <label for="url">ลิงค์งาน</label>
         <input
           type="text"
-          placeholder="ลิงค์งาน"
+          placeholder="https://bit.ly/xlink"
           v-model="state.work.url"
           required
         />
         <label for="name">วันที่มอบหมาย</label>
         <input
           type="datetime-local"
-          placeholder="วันที่มอบหมาย"
           v-model="state.work.assign_date"
           required
         />
         <label for="name">วันที่กำหนดส่ง</label>
-        <input
-          type="datetime-local"
-          placeholder="วันที่กำหนดส่ง"
-          v-model="state.work.due_date"
-          required
-        />
-        <input type="submit" value="เพิ่มงาน" class="add" />
+        <input type="datetime-local" v-model="state.work.due_date" required />
+        <input type="submit" value="ตกลง" class="add" />
         <div
           class="cancel"
           @click="
@@ -133,17 +135,18 @@ export default {
     const state = reactive({
       name: "3xbun",
       works: [],
-      apiURL: "http://localhost:8080",
       message: "",
       err: false,
       showModal: false,
       title: "",
       deleting: false,
+      editing: false,
       work: {
         name: "",
         url: "",
         assign_date: "",
         due_date: "",
+        key: "",
       },
     });
 
@@ -171,7 +174,7 @@ export default {
     };
 
     const readWork = () => {
-      const promise = axios.get(`${state.apiURL}/api/works`);
+      const promise = axios.get(`${global.apiURL}/api/works`);
       promise.then((res) => (state.works = res.data));
     };
 
@@ -181,41 +184,63 @@ export default {
         url: "",
         assign_date: "",
         due_date: "",
+        key: "",
       };
     };
 
     const deleteWork = (id) => {
-      const promise = axios.delete(`${state.apiURL}/api/works/${id}`);
+      const promise = axios.delete(`${global.apiURL}/api/works/${id}`);
       promise.then((res) => {
         state.message = res.data;
         readWork();
       });
     };
 
-    const addWork = () => {
-      const promise = axios
-        .post(`${global.apiURL}/api/works`, state.work)
-        .catch((err) => {
-          if (err) state.err = true;
-        });
+    const submit = () => {
+      if (state.editing) {
+        const promise = axios
+          .post(`${global.apiURL}/api/works/${state.work._id}`, state.work)
+          .catch((err) => {
+            if (err) state.err = true;
+          });
 
-      promise.then((res) => {
-        if (state.err) {
-          console.log("error");
-        } else {
-          state.message = res.data;
-        }
-        state.showModal = false;
-        readWork();
-        resetWork();
-      });
+        promise.then((res) => {
+          if (state.err) {
+            console.log("error");
+          } else {
+            state.message = res.data;
+          }
+          state.showModal = false;
+          readWork();
+          resetWork();
+        });
+      } else {
+        const promise = axios
+          .post(`${global.apiURL}/api/works`, state.work)
+          .catch((err) => {
+            if (err) state.err = true;
+          });
+
+        promise.then((res) => {
+          if (state.err) {
+            console.log("error");
+          } else {
+            state.message = res.data;
+          }
+          state.showModal = false;
+          readWork();
+          resetWork();
+        });
+      }
+
+      state.editing = false;
     };
 
     onMounted(() => {
       readWork();
     });
 
-    return { state, formatDate, deleteWork, addWork, resetWork, countDate };
+    return { state, formatDate, deleteWork, submit, resetWork, countDate };
   },
 };
 </script>
@@ -255,7 +280,7 @@ ul {
   border-radius: 1em;
   width: 50vw;
   max-width: 500px;
-  position: absolute;
+  position: fixed;
   top: 10vh;
   z-index: 1;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
