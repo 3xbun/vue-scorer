@@ -17,7 +17,8 @@ export default {
   setup() {
     const global = reactive({
       isLogin: false,
-      apiURL: "http://localhost:8080",
+      isAdmin: false,
+      apiURL: "https://vue-scorer-api.herokuapp.com",
     });
 
     provide("global", global);
