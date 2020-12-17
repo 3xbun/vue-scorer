@@ -42,6 +42,25 @@
       </div>
       <Students v-if="state.showStudent" />
     </div>
+    <div id="JsonParser" class="items">
+      <div class="header">
+        <h1>กรอกคะแนน</h1>
+        &nbsp;
+        <div class="icon">
+          <i
+            @click="state.JsonParser = true"
+            v-if="!state.JsonParser"
+            class="far fa-eye"
+          ></i>
+          <i
+            @click="state.JsonParser = false"
+            v-else
+            class="far fa-eye-slash"
+          ></i>
+        </div>
+      </div>
+      <JsonParser v-if="state.JsonParser" />
+    </div>
     <br />
     <center>
       <router-link
@@ -59,18 +78,21 @@
 import { reactive, inject, onMounted } from "vue";
 import Works from "../components/Works";
 import Students from "../components/Students";
+import JsonParser from "../components/JsonParser";
 import routes from "../router";
 
 export default {
   components: {
     Works,
     Students,
+    JsonParser,
   },
   setup() {
     const global = inject("global");
     const state = reactive({
       showWork: false,
       showStudent: false,
+      JsonParser: false,
     });
 
     onMounted(() => {
