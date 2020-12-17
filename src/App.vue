@@ -67,4 +67,10 @@ body {
   width: 85vw;
   max-width: 600px;
 }
+
+@media screen and (max-width: 425px) {
+  body {
+    font-size: 10px;
+  }
+}
 </style>
