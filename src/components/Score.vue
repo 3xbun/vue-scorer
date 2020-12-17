@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 #score {
-  width: 50vw;
+  width: 100%;
 }
 
 table {
