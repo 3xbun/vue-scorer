@@ -13,7 +13,7 @@
     <p class="updatedAt">อัพเดทเมื่อ {{ state.updatedAt }}</p>
 
     <div class="btn" v-if="global.isAdmin" @click="state.showModal = true">
-      กรอกคะแนน
+      แก้ไขคะแนน
     </div>
   </div>
 

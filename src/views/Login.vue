@@ -68,6 +68,8 @@ export default {
     };
 
     const authenticate = () => {
+      state.err = "";
+      state.msg = "กำลังเข้าสู่ระบบ . . .";
       const promise = axios
         .post(`${global.apiURL}/api/students/authenticate/${state.username}`, {
           password: state.password,
@@ -81,14 +83,16 @@ export default {
             ? (global.isAdmin = true)
             : (global.isAdmin = false);
           global.isLogin = true;
-          state.msg = "กำลังเข้าสู่ระบบ . . .";
           routes.push({ name: "User", params: { id: state.username } });
           reset();
         } else if (res.data.status === 401) {
+          state.msg = "";
           state.err = "รหัสผ่านไม่ถูกต้อง";
         } else if (res.data.status === 404) {
+          state.msg = "";
           state.err = "ไม่พบรหัสนักเรียน " + state.username;
         } else {
+          state.msg = "";
           state.err = "พบข้อผิดพลาด กรุณาลองใหม่";
         }
       });
