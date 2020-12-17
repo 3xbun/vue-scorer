@@ -12,13 +12,9 @@
           <i
             @click="state.showWork = true"
             v-if="!state.showWork"
-            class="far fa-eye"
+            class="fas fa-caret-down"
           ></i>
-          <i
-            @click="state.showWork = false"
-            v-else
-            class="far fa-eye-slash"
-          ></i>
+          <i @click="state.showWork = false" v-else class="fas fa-caret-up"></i>
         </div>
       </div>
       <Works v-if="state.showWork" />
@@ -31,12 +27,12 @@
           <i
             @click="state.showStudent = true"
             v-if="!state.showStudent"
-            class="far fa-eye"
+            class="fas fa-caret-down"
           ></i>
           <i
             @click="state.showStudent = false"
             v-else
-            class="far fa-eye-slash"
+            class="fas fa-caret-up"
           ></i>
         </div>
       </div>
@@ -50,12 +46,12 @@
           <i
             @click="state.JsonParser = true"
             v-if="!state.JsonParser"
-            class="far fa-eye"
+            class="fas fa-caret-down"
           ></i>
           <i
             @click="state.JsonParser = false"
             v-else
-            class="far fa-eye-slash"
+            class="fas fa-caret-up"
           ></i>
         </div>
       </div>

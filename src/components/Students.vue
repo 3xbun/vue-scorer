@@ -1,7 +1,7 @@
 <template>
   <div id="Students">
     <Searchbar />
-    <br />
+    <div class="small"></div>
     <Room :class="{ hide: student.selectedStudent.name }" />
     <div class="student" v-if="student.selectedStudent.name">
       <center>
@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style>
+.small {
+  height: 1em;
+}
 .hide {
   display: none;
 }
@@ -80,5 +83,13 @@ export default {
 }
 .id {
   color: var(--blue);
+}
+
+select {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 </style>

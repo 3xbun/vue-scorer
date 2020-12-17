@@ -34,7 +34,7 @@ export default {
   --dark-blue: #243447;
   --white: #fff;
   --black: #151e29;
-  --red: #b00020;
+  --red: #ff333a;
   --grey: #657786;
   --light-grey: #aab8c2;
   --dark-grey: #1b2737;

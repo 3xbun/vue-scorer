@@ -121,6 +121,11 @@ i {
   border-radius: 1em;
 }
 
+#dropdown li:hover {
+  transform: scale(1.04);
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 #dropdown a {
   display: inline-block;
   width: 100%;

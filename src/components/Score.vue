@@ -160,7 +160,8 @@ td {
 }
 
 .grey {
-  color: var(--grey);
+  color: var(--white);
+  filter: brightness(70%);
 }
 
 .back {

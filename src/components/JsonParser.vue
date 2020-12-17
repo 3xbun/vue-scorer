@@ -1,10 +1,10 @@
 <template>
   <div id="JsonParser">
     <center>
-      <h3>กรอกคะแนน</h3>
+      <h3>อัพโหลดไฟล์คะแนน (.json)</h3>
       <form id="formJson" @submit.prevent="readJson">
         <input type="file" id="Json" />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" id="submit" />
         <div class="err">{{ state.err }}</div>
       </form>
     </center>
@@ -65,5 +65,21 @@ export default {
 input {
   font-size: inherit;
   font-family: inherit;
+}
+
+#Json {
+  margin: 1em;
+  width: 50%;
+}
+
+#submit {
+  border: 1px solid var(--blue);
+  cursor: pointer;
+  width: fit-content;
+  padding: 0.25em 0.5em;
+  background: var(--blue);
+  border-radius: 1em;
+  color: var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 </style>
