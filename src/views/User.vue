@@ -18,12 +18,10 @@
     </div>
 
     <center>
-      <router-link
-        @click="global.isLogin = false"
-        id="logout"
-        :to="{ name: 'Home' }"
-      >
-        ออกจากระบบ
+      <router-link @click="global.isLogin = false" :to="{ name: 'Home' }">
+        <div class="logout">
+          ออกจากระบบ
+        </div>
       </router-link>
     </center>
   </div>
@@ -69,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .display {
   margin-bottom: 5em;
 }
@@ -104,7 +102,7 @@ export default {
   border-radius: 50%;
 }
 
-#logout {
+.logout {
   display: block;
   background: var(--red);
   border-radius: 1em;

@@ -98,8 +98,9 @@ td {
   border: solid 1px rgba(101, 119, 134, 0.5);
 }
 
-tr {
+tbody {
   cursor: pointer;
+  width: 100%;
 }
 
 .center {
