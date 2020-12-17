@@ -11,10 +11,10 @@
     <table class="students">
       <thead>
         <tr>
-          <th>รหัส</th>
-          <th>เลขที่</th>
-          <th>ชื่อ</th>
-          <th>นามสกุล</th>
+          <th class="id">รหัส</th>
+          <th class="no">เลขที่</th>
+          <th class="name">ชื่อ</th>
+          <th class="surname">นามสกุล</th>
         </tr>
       </thead>
       <tbody>
@@ -23,10 +23,10 @@
           :key="std.id"
           @click="student.selectedStudent = std"
         >
-          <td style="color: var(--blue)" class="center">{{ std.id }}</td>
-          <td class="center">{{ std.room.slice(2) }}</td>
-          <td>{{ std.name }}</td>
-          <td>{{ std.surname }}</td>
+          <td style="color: var(--blue)" class="id center">{{ std.id }}</td>
+          <td class="no center">{{ std.room.slice(2) }}</td>
+          <td class="name">{{ std.name }}</td>
+          <td class="surname">{{ std.surname }}</td>
         </tr>
       </tbody>
     </table>
@@ -49,11 +49,13 @@ export default {
     watch(
       () => state.room,
       () => {
-        state.filteredStudents = state.students.filter((std) => {
-          if (std.room) {
-            return std.room.startsWith(state.room);
-          }
-        });
+        state.filteredStudents = state.students
+          .filter((std) => {
+            if (std.room) {
+              return std.room.startsWith(state.room);
+            }
+          })
+          .sort((a, b) => a.id - b.id);
       }
     );
 
@@ -102,5 +104,17 @@ tr {
 
 .center {
   text-align: center;
+}
+
+.id {
+  width: 10%;
+}
+
+.no {
+  width: 10%;
+}
+
+.surname {
+  width: 40%;
 }
 </style>
