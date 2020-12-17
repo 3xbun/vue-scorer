@@ -81,7 +81,6 @@ export default {
     };
 
     const submit = () => {
-      state.showModal = false;
       console.log(state.inputScores);
       const promise = axios.post(
         `${global.apiURL}/api/scores/${student.selectedStudent.id}`,
@@ -91,6 +90,7 @@ export default {
       promise.then((res) => {
         console.log(res.data);
         readScore();
+        state.showModal = false;
       });
     };
 
