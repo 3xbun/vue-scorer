@@ -3,8 +3,8 @@
     <table>
       <tr v-for="(work, key) in state.works" :key="key">
         <td class="work">{{ work.name }}</td>
-        <td v-if="state.scores && state.scores[work.key]" class="score">
-          {{ state.scores[work.key] }}
+        <td v-if="state.scores && state.scores[0][work.key]" class="score">
+          {{ state.scores[0][work.key] }}
         </td>
         <td v-else class="score grey">0</td>
       </tr>
