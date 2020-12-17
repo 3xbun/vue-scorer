@@ -1,5 +1,7 @@
 # Vue Scorer
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4c1e0187-05c0-4736-a3a5-92f6213872e6/deploy-status)](https://app.netlify.com/sites/vue-scorer/deploys)
+
 Web application build from vue to tell score for my student in Materdei School, Thailand
 
 ## Usage
