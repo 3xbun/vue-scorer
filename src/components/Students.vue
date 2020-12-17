@@ -2,6 +2,7 @@
   <div id="Students">
     <Searchbar />
     <br />
+    <Room :class="{ hide: student.selectedStudent.name }" />
     <div class="student" v-if="student.selectedStudent.name">
       <center>
         <div
@@ -31,10 +32,12 @@
 import { computed, provide, reactive, inject } from "vue";
 import Searchbar from "./Searchbar";
 import Score from "./Score";
+import Room from "./Room";
 export default {
   components: {
     Searchbar,
     Score,
+    Room,
   },
   setup() {
     const global = inject("global");
@@ -44,6 +47,7 @@ export default {
         () =>
           student.selectedStudent.name + " " + student.selectedStudent.surname
       ),
+      showRoom: false,
     });
 
     provide("student", student);
@@ -57,6 +61,10 @@ export default {
 </script>
 
 <style>
+.hide {
+  display: none;
+}
+
 .student {
   background: var(--dark-grey);
   border-radius: 1em;

@@ -15,6 +15,16 @@
     <div class="btn" v-if="global.isAdmin" @click="state.showModal = true">
       แก้ไขคะแนน
     </div>
+    <br />
+    <center>
+      <p
+        class="score grey back"
+        style="text-decoration: underline"
+        @click="student.selectedStudent = {}"
+      >
+        ย้อนกลับ
+      </p>
+    </center>
   </div>
 
   <div v-if="state.showModal" class="modal">
@@ -107,7 +117,7 @@ export default {
       readWork();
     });
 
-    return { state, global, submit };
+    return { state, global, submit, student };
   },
 };
 </script>
@@ -151,6 +161,10 @@ td {
 
 .grey {
   color: var(--grey);
+}
+
+.back {
+  cursor: pointer;
 }
 
 .score {
