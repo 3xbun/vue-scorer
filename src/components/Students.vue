@@ -1,9 +1,12 @@
 <template>
   <div id="Students">
-    <Searchbar />
+    <Searchbar v-if="global.isAdmin" />
     <div class="small"></div>
-    <Room :class="{ hide: student.selectedStudent.name }" />
-    <div class="student" v-if="student.selectedStudent.name">
+    <Room
+      v-if="global.isAdmin"
+      :class="{ hide: student.selectedStudent.name }"
+    />
+    <div class="student" v-if="student.selectedStudent.id">
       <center>
         <div
           id="profileImage"
@@ -29,10 +32,13 @@
 </template>
 
 <script>
-import { computed, provide, reactive, inject } from "vue";
+import { computed, provide, reactive, inject, onMounted } from "vue";
 import Searchbar from "./Searchbar";
 import Score from "./Score";
 import Room from "./Room";
+import { useRoute } from "vue-router";
+import axios from "axios";
+
 export default {
   components: {
     Searchbar,
@@ -41,6 +47,8 @@ export default {
   },
   setup() {
     const global = inject("global");
+    const route = useRoute();
+
     const student = reactive({
       selectedStudent: {},
       fullName: computed(
@@ -54,6 +62,16 @@ export default {
 
     const profileImage = (seed) =>
       `https://avatars.dicebear.com/api/avataaars/${seed}.svg?top[]=longHair&skin[]=tanned&skin[]=pale&skin[]=light`;
+
+    onMounted(() => {
+      if (route.params.id !== "admin") {
+        const promise = axios.get(
+          `${global.apiURL}/api/students/${route.params.id}`
+        );
+
+        promise.then((res) => (student.selectedStudent = res.data[0]));
+      }
+    });
 
     return { student, profileImage, global };
   },

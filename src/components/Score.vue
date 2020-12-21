@@ -21,6 +21,7 @@
         class="score grey back"
         style="text-decoration: underline"
         @click="student.selectedStudent = {}"
+        v-if="global.isAdmin"
       >
         ย้อนกลับ
       </p>
