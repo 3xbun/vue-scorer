@@ -75,6 +75,9 @@ export default {
 }
 #profileImage {
   margin-top: 1em;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
 }
 .information {
   display: flex;
@@ -91,5 +94,9 @@ select {
 
 tbody tr:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.profilePicture {
+  border-radius: 50%;
 }
 </style>
