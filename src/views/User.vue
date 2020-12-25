@@ -2,13 +2,11 @@
   <div id="login" class="display">
     <Student />
 
-    <center>
-      <router-link @click="global.isLogin = false" :to="{ name: 'Home' }">
-        <div class="logout">
-          ออกจากระบบ
-        </div>
-      </router-link>
-    </center>
+    <router-link @click="global.isLogin = false" :to="{ name: 'Home' }">
+      <div class="logout">
+        ออกจากระบบ
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -66,7 +64,7 @@ export default {
 }
 
 .logout {
-  margin-top: 1em;
+  margin: 1em auto 0;
   display: block;
   background: var(--red);
   border-radius: 1em;

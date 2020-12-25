@@ -74,4 +74,8 @@ body {
     font-size: 10px;
   }
 }
+
+.center {
+  margin: 0 auto;
+}
 </style>

@@ -98,7 +98,7 @@
     </div>
 
     <div v-if="state.deleting" class="modal">
-      <center>
+      <div class="center">
         <h3>ต้องการลบ</h3>
         <h1>
           {{ state.work.name }}
@@ -119,7 +119,7 @@
             >ยกเลิก</span
           >
         </div>
-      </center>
+      </div>
     </div>
   </div>
 </template>

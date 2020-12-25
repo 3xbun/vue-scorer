@@ -46,7 +46,7 @@
       <JsonParser v-if="state.JsonParser" />
     </div>
     <br />
-    <center>
+    <div class="center">
       <router-link
         @click="global.isLogin = false"
         id="logout"
@@ -54,7 +54,7 @@
       >
         ออกจากระบบ
       </router-link>
-    </center>
+    </div>
   </div>
 </template>
 
@@ -115,6 +115,7 @@ export default {
 }
 
 #logout {
+  margin: auto;
   display: block;
   background: var(--red);
   border-radius: 1em;

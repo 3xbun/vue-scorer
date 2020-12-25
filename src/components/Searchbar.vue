@@ -1,6 +1,6 @@
 <template>
   <div>
-    <center>
+    <div class="center">
       <div id="searchbar" :class="{ focus: state.searching }">
         <i class="fas fa-search"></i> &nbsp;
         <input
@@ -24,7 +24,7 @@
           </li>
         </a>
       </ul>
-    </center>
+    </div>
   </div>
 </template>
 

@@ -16,7 +16,7 @@
       แก้ไขคะแนน
     </div>
     <br />
-    <center>
+    <div class="center">
       <p
         class="score grey back"
         style="text-decoration: underline"
@@ -25,7 +25,7 @@
       >
         ย้อนกลับ
       </p>
-    </center>
+    </div>
   </div>
 
   <div v-if="state.showModal" class="modal">
@@ -36,10 +36,10 @@
           <input type="number" v-model="state.inputScores[work.key]" />
         </td>
       </table>
-      <center>
+      <div class="center">
         <input type="submit" value="ตกลง" class="add" />
         <div class="cancel" @click="state.showModal = false">ยกเลิก</div>
-      </center>
+      </div>
     </form>
   </div>
 </template>

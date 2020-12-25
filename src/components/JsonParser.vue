@@ -1,13 +1,13 @@
 <template>
   <div id="JsonParser">
-    <center>
+    <div class="center">
       <h3>อัพโหลดไฟล์คะแนน (.json)</h3>
       <form id="formJson" @submit.prevent="readJson">
         <input type="file" id="Json" />
         <input type="submit" value="Submit" id="submit" />
         <div class="err">{{ state.err }}</div>
       </form>
-    </center>
+    </div>
   </div>
 </template>
 

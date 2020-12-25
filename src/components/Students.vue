@@ -7,18 +7,16 @@
       :class="{ hide: student.selectedStudent.name }"
     />
     <div class="student" v-if="student.selectedStudent.id">
-      <center>
-        <div
-          id="profileImage"
-          :style="{ background: student.selectedStudent.profileColor }"
-        >
-          <img
-            class="profilePicture"
-            :src="profileImage(student.selectedStudent.name)"
-            alt="profilePicture"
-          />
-        </div>
-      </center>
+      <div
+        id="profileImage"
+        :style="{ background: student.selectedStudent.profileColor }"
+      >
+        <img
+          class="profilePicture"
+          :src="profileImage(student.selectedStudent.name)"
+          alt="profilePicture"
+        />
+      </div>
       <div class="information">
         <p>
           <strong>{{ student.fullName }} </strong>
@@ -92,7 +90,7 @@ export default {
   padding: 1em;
 }
 #profileImage {
-  margin-top: 1em;
+  margin: 1em auto 1em;
   width: 5em;
   height: 5em;
   border-radius: 50%;
