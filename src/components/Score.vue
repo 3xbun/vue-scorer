@@ -16,16 +16,14 @@
       แก้ไขคะแนน
     </div>
     <br />
-    <div class="center">
-      <p
-        class="score grey back"
-        style="text-decoration: underline"
-        @click="student.selectedStudent = {}"
-        v-if="global.isAdmin"
-      >
-        ย้อนกลับ
-      </p>
-    </div>
+    <p
+      class="score grey back center"
+      style="text-decoration: underline"
+      @click="student.selectedStudent = {}"
+      v-if="global.isAdmin"
+    >
+      ย้อนกลับ
+    </p>
   </div>
 
   <div v-if="state.showModal" class="modal">
@@ -56,7 +54,7 @@ export default {
     const state = reactive({
       showModal: false,
       works: {},
-      scores: {},
+      scores: [],
       inputScores: computed(() => {
         let scores = {};
         for (let work in state.works) {
