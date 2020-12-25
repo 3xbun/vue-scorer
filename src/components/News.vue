@@ -5,22 +5,11 @@
     </h1>
     <div class="news">
       <ul>
-        <div class="news-items">
-          <li>ข่าว #1</li>
-          <span class="date">3 วันที่แล้ว</span>
-        </div>
-        <div class="news-items">
+        <div class="news-item" v-for="news in state.news" :key="news.id">
           <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-            similique dolore facere ut vel distinctio. Adipisci, officiis
-            expedita? Quae nulla ratione ex facilis, aliquam saepe quidem minus
-            labore laborum ullam!
+            <u>{{ news.title }}</u> <br />
+            <span>{{ news.content }} </span>
           </li>
-          <span class="date">1 วันที่แล้ว</span>
-        </div>
-        <div class="news-items">
-          <li>ข่าว #1</li>
-          <span class="date">ไม่กี่วินาที</span>
         </div>
       </ul>
     </div>
@@ -28,11 +17,29 @@
 </template>
 
 <script>
-export default {};
+import { onMounted, reactive } from "vue";
+import axios from "axios";
+export default {
+  setup() {
+    const state = reactive({
+      news: [],
+    });
+
+    onMounted(() => {
+      const promise = axios.get(
+        "https://gist.githubusercontent.com/3xbun/1440ab456a777752dbf61854790aac1a/raw"
+      );
+
+      promise.then((res) => (state.news = res.data));
+    });
+
+    return { state };
+  },
+};
 </script>
 
 <style>
-.news-items {
+.news-item {
   background: var(--grey);
   margin: 1em auto;
   padding: 0.5em 1em;
